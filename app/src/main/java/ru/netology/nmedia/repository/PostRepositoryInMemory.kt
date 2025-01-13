@@ -130,6 +130,13 @@ posts =posts.filter { it.id != id }
         _data.value = posts
     }
 
+    override fun update(post: Post) {
+        posts = posts.map{
+            if(it.id != post.id) it else post
+        }
+        _data.value = posts
+    }
+
 }
 
 

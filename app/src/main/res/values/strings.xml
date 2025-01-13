@@ -10,7 +10,9 @@
     <string name="share_count" translatable="false">35</string>
     <string name="view_count" translatable="false">2032</string>
     <string name="like_description" translatable="false">Like</string>
-    <string name="menu_remove" translatable="false">Remove</string>
-    <string name="description_post_save" translatable="false">Seve</string>
+    <string name="menu_remove">Remove</string>
+    <string name="description_post_save">Seve</string>
     <string name="em" translatable="false">error_empty_content</string>
+    <string name="menu_edit">Edit</string>
+    <string name="description_post_cancellation">Cancellation</string>
 </resources>

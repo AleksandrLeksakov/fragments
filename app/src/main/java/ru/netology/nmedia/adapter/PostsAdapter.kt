@@ -16,6 +16,8 @@ sealed class PostAction {
     data class Like(val postId: Long) : PostAction()
     data class Share(val postId: Long) : PostAction()
     data class Remove(val postId: Long) : PostAction()
+    data class Edit(val postId: Long) : PostAction()
+    data class CancelEdit(val postId: Long) : PostAction()
 }
 
 class PostsAdapter(private val callback: (PostAction) -> Unit) :

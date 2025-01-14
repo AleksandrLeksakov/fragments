@@ -49,27 +49,27 @@ class PostViewHolder(
         published.text = post.published
         content.text = post.content
         share.setOnClickListener {
-            callback(PostAction.Share(post.id)) // Call callback with PostAction.Share
+            callback(PostAction.Share(post.id))
         }
         like.setImageResource(
             if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
         )
         like.setOnClickListener {
-            callback(PostAction.Like(post.id))  // Call callback with PostAction.Like
+            callback(PostAction.Like(post.id))
         }
-
-
-
         menu.setOnClickListener {
             PopupMenu(it.context, it).apply {
                 inflate(R.menu.menu_options)
-                setOnMenuItemClickListener {
-                    when (it.itemId) {
+                setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
                         R.id.remove -> {
                             callback(PostAction.Remove(post.id))
                             true
                         }
-
+                        R.id.edit -> {
+                            callback(PostAction.Edit(post.id))
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -96,4 +96,3 @@ class PostViewHolder(
         override fun areContentsTheSame(oldItem: Post, newItem: Post) = oldItem == newItem
     }
 }
-

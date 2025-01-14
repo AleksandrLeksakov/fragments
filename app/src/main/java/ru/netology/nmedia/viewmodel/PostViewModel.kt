@@ -1,5 +1,6 @@
 package ru.netology.nmedia.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
@@ -7,7 +8,8 @@ import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryInMemory
 import kotlin.random.Random
 
-private val emty = Post(
+// Создаем пустой пост, который можно использовать по умолчанию
+private val empty = Post(
     id = 0,
     content = "",
     published = "",
@@ -18,35 +20,60 @@ private val emty = Post(
     shares = 0
 )
 
-class PostViewModel() : ViewModel() {
+class PostViewModel : ViewModel() {
 
+    // Создаем репозиторий для работы с данными
     private val repository: PostRepository = PostRepositoryInMemory()
-    private val _data = MutableLiveData(repository.getAll().value)
-    val LiveData<List<Post>> = _data
-
+    // Создаем MutableLiveData, которая содержит список всех постов. Инициализируем пустой список.
+    private val _data = MutableLiveData<List<Post>>(emptyList())
+    // Создаем LiveData для предоставления доступа к данным, но запрещаем изменять эти данные напрямую
+    val data: LiveData<List<Post>> = _data // Переименовали свойство
+    // Переменная для хранения текущего редактируемого поста (может быть null, если редактирование не идет)
     private var currentPost: Post? = null;
-
+    // Инициализация ViewModel
     init {
-        _data.value = repository.getAll().value
+        // Когда ViewModel создается, мы обновляем _data со всеми значениями из репозитория.
+        loadPosts()
     }
 
+
+    private fun loadPosts(){
+        try{
+            _data.value = repository.getAll().value ?: emptyList()
+        } catch(e: Exception){
+            println("Error loading posts ${e.message}")
+            _data.value = emptyList()
+        }
+    }
     fun getPostById(id: Long): Post? {
-        return  repository.getAll().value?.find { it.id == id}
+        // Получаем все посты из репозитория и ищем тот, чей id равен заданному.
+        return repository.getAll().value?.find { it.id == id }
     }
     fun likeById(id: Long) {
+        // Вызываем метод репозитория, чтобы обновить данные поста.
         repository.likeById(id)
-        _data.value = repository.getAll().value
+        // Обновляем LiveData, чтобы UI получил уведомление об изменениях.
+        loadPosts()
     }
+
+
     fun shareById(id: Long) {
+        // Вызываем метод репозитория, чтобы обновить данные поста.
         repository.shareById(id)
-        _data.value = repository.getAll().value
+        // Обновляем LiveData, чтобы UI получил уведомление об изменениях.
+        loadPosts()
     }
-    fun removeById(id: Long){
+
+    fun removeById(id: Long) {
+        // Вызываем метод репозитория, чтобы удалить пост.
         repository.removeById(id)
-        _data.value = repository.getAll().value
+        // Обновляем LiveData, чтобы UI получил уведомление об изменениях.
+        loadPosts()
     }
+
     fun save(content: String) {
-        val post =  Post(
+        // Создаем новый пост с рандомным id
+        val post = Post(
             id = Random.nextLong(),
             author = "Me",
             published = "Now",
@@ -56,14 +83,16 @@ class PostViewModel() : ViewModel() {
             likes = 0,
             shares = 0
         )
+
         repository.save(post)
-        _data.value = repository.getAll().value
+        loadPosts()
     }
-    fun update(post: Post){
+    fun update(post: Post) {
+
         repository.update(post)
-        _data.value = repository.getAll().value
+        loadPosts()
     }
     fun cancelEdit() {
-        _data.value = repository.getAll().value
+        loadPosts()
     }
 }

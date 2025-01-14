@@ -13,5 +13,4 @@ interface PostRepository {
     fun save(post: Post)
     fun update(post: Post)
 
-
 }

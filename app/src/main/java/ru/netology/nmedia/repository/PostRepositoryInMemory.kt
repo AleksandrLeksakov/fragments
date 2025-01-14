@@ -102,53 +102,48 @@ private var nextId = 1L
     private val _data = MutableLiveData(posts)
 
     override fun getAll(): LiveData<List<Post>> = _data
+
     override fun likeById(id: Long) {
         posts = posts.map {
             if (it.id != id) it else it.copy(
                 likedByMe = !it.likedByMe,
-                likes = if (it.likedByMe) it.likes - 1 else it.likes + 1)
+                likes = if (it.likedByMe) it.likes - 1 else it.likes + 1
+            )
         }
         _data.value = posts
     }
 
     override fun shareById(id: Long) {
         posts = posts.map {
-            if (it.id != id) it else it.copy(
-                shares = it.shares + 1
-            )
+            if (it.id != id) it else it.copy(shares = it.shares + 1)
         }
         _data.value = posts
     }
-// удоление поста
+
     override fun removeById(id: Long) {
-posts =posts.filter { it.id != id }
+        posts = posts.filter { it.id != id }
         _data.value = posts
     }
-// добавление поста
+
+
     override fun save(post: Post) {
-        posts = listOf(post.copy(id = nextId++, author = "Me", published = "Now")) + posts
+        val newPost = post.copy(id = nextId++, author = "Me", published = "Now")
+        posts = listOf(newPost) + posts
         _data.value = posts
     }
 
     override fun update(post: Post) {
-        posts = posts.map{
-            if(it.id != post.id) it else post
+        posts = posts.map {
+            if (it.id != post.id) it else post.copy(
+                content = post.content,
+                author = post.author,
+                published = post.published,
+                likes = post.likes,
+                shares = post.shares,
+                likedByMe = post.likedByMe,
+                shareByMe = post.shareByMe
+            )
         }
         _data.value = posts
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

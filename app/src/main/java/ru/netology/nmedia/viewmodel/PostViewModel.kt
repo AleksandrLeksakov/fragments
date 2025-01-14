@@ -8,18 +8,6 @@ import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryInMemory
 import kotlin.random.Random
 
-// Создаем пустой пост, который можно использовать по умолчанию
-private val empty = Post(
-    id = 0,
-    content = "",
-    published = "",
-    author = "",
-    likedByMe = false,
-    shareByMe = false,
-    likes = 0,
-    shares = 0
-)
-
 class PostViewModel : ViewModel() {
 
     // Создаем репозиторий для работы с данными
@@ -28,8 +16,7 @@ class PostViewModel : ViewModel() {
     private val _data = MutableLiveData<List<Post>>(emptyList())
     // Создаем LiveData для предоставления доступа к данным, но запрещаем изменять эти данные напрямую
     val data: LiveData<List<Post>> = _data // Переименовали свойство
-    // Переменная для хранения текущего редактируемого поста (может быть null, если редактирование не идет)
-    private var currentPost: Post? = null;
+
     // Инициализация ViewModel
     init {
         // Когда ViewModel создается, мы обновляем _data со всеми значениями из репозитория.

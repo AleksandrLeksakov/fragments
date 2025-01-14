@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideKeyboard() {
         // Метод для скрытия клавиатуры
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager // Получаем InputMethodManager
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager // Получаем InputMethodManager
         imm.hideSoftInputFromWindow(binding.content.windowToken, 0) // Скрытие клавиатуры
     }
 }

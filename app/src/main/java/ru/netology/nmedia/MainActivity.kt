@@ -12,6 +12,7 @@ import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.adapter.PostAction
+import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 binding.content.text.clear() // Очищаем поле ввода
                 binding.inputGroup.visibility = View.GONE // Скрываем поле ввода
-                hideKeyboard() // Скрытие клавиатуры
+                AndroidUtils.hideKeyboard(binding.content) // Скрытие клавиатуры
             } else {
                 Toast.makeText(this, "Cannot save empty post", Toast.LENGTH_SHORT).show() // Уведомление
             }
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity() {
             binding.inputGroup.visibility = View.GONE // Скрываем поле ввода
             currentEditPost = null // Сбрасываем редактируемый пост
             binding.content.text.clear() // Очищаем поле ввода
-            hideKeyboard() // Скрытие клавиатуры
+            AndroidUtils.hideKeyboard(binding.content) // Скрытие клавиатуры
         }
         binding.fab.setOnClickListener {
             // Обработка нажатия на FAB (кнопка добавления)
@@ -98,9 +99,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hideKeyboard() {
+   // private fun hideKeyboard() {
         // Метод для скрытия клавиатуры
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager // Получаем InputMethodManager
-        imm.hideSoftInputFromWindow(binding.content.windowToken, 0) // Скрытие клавиатуры
-    }
+     //   val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager // Получаем InputMethodManager
+       // imm.hideSoftInputFromWindow(binding.content.windowToken, 0) // Скрытие клавиатуры
+    //}
 }

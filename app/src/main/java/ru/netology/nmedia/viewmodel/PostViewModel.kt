@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositoryInMemory
+import ru.netology.nmedia.repository.PostRepositoryInMemoryImpl
 import kotlin.random.Random
 
 class PostViewModel : ViewModel() {
 
     // Создаем репозиторий для работы с данными
-    private val repository: PostRepository = PostRepositoryInMemory()
+    private val repository: PostRepository = PostRepositoryInMemoryImpl()
     // Создаем MutableLiveData, которая содержит список всех постов. Инициализируем пустой список.
     private val _data = MutableLiveData<List<Post>>(emptyList())
     // Создаем LiveData для предоставления доступа к данным, но запрещаем изменять эти данные напрямую

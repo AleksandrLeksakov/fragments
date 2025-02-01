@@ -16,7 +16,7 @@ private var nextId = 1L
             likedByMe = false,
             shareByMe = false,
             likes = 999,
-            shares = 10998
+            shares = 1100
         ),
         Post(
             id = nextId++,

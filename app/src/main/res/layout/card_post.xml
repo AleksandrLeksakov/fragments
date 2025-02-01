@@ -83,29 +83,28 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        style="@style/Widget.AppTheme.LikeCheckBox"
-        android:text="@string/like_count"
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
-        app:buttonCompat="@drawable/like_silector"
+        style="@style/Widget.App.Theme.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:layout_marginTop="16dp"
+        android:checkable="true"
         android:contentDescription="@string/like_description"
+        android:text="@string/like_count"
+        app:icon="@drawable/like_silector"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/ic_baseline_favorite_24"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/content"/>
 
 
-<!--    <TextView-->
-<!--        android:id="@+id/like_count"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/like_count"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/like"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/like"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/like" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/like_count"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/like_count"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/like"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/like"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/like" />-->
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/like_barrier"

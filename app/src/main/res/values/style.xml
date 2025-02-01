@@ -3,8 +3,16 @@
 
 
     <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
-        <item name="buttonTint">#F00</item>
+        <item name="buttonTint">@color/like_color</item>
     </style>
+
+    <style name="Widget.App.Theme.LikeButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="iconTint">@color/like_color</item>
+        <item name="android:minWidth">0dp
+        </item>
+    </style>
+
+
 
 
 </resources>

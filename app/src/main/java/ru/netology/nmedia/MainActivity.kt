@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.adapter.PostsAdapter
@@ -24,7 +25,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater) // Инициализация ViewBinding
-        setContentView(binding.root) // Установка корневого View
+        setContentView(binding.root)
+        enableEdgeToEdge()
+        // Установка корневого View
         val viewModel: PostViewModel by viewModels() // Получение ViewModel
         val adapter = PostsAdapter { action ->
             // Обработка действий, полученных из адаптера

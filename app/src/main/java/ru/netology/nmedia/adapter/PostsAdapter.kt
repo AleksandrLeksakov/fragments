@@ -48,12 +48,15 @@ class PostViewHolder(
         author.text = post.author
         published.text = post.published
         content.text = post.content
+        like.isChecked = post.likedByMe
+        like.setText(post.likes.formatCount())
+
         share.setOnClickListener {
             callback(PostAction.Share(post.id))
         }
-        like.setImageResource(
-            if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
-        )
+//        like.setImageResource(
+//            if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
+//        )
         like.setOnClickListener {
             callback(PostAction.Like(post.id))
         }
@@ -76,7 +79,7 @@ class PostViewHolder(
             }.show()
         }
 
-        likeCount.text = post.likes.formatCount()
+//        likeCount.text = post.likes.formatCount()
         shareCount.text = post.shares.formatCount()
     }
 

@@ -83,12 +83,14 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
-    <ImageView
+    <com.google.android.material.checkbox.MaterialCheckBox
+        style="@style/Widget.AppTheme.LikeCheckBox"
+        android:text="@string/like_count"
         android:id="@+id/like"
+        app:buttonCompat="@drawable/like_silector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:layout_marginTop="@dimen/common_spacing"
         android:contentDescription="@string/like_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content"
@@ -96,14 +98,14 @@
         />
 
 
-    <TextView
-        android:id="@+id/like_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/like_count"
-        app:layout_constraintBottom_toBottomOf="@+id/like"
-        app:layout_constraintStart_toEndOf="@+id/like"
-        app:layout_constraintTop_toTopOf="@+id/like" />
+<!--    <TextView-->
+<!--        android:id="@+id/like_count"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/like_count"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/like"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/like"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/like" />-->
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/like_barrier"
@@ -117,17 +119,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
-        app:constraint_referenced_ids="like_count" />
+        app:constraint_referenced_ids="like" />
 
     <ImageButton
         android:id="@+id/share"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/like"
         android:src="@drawable/baseline_share_24"
-        app:layout_constraintStart_toEndOf="@+id/like_count_barrier"
+        app:layout_constraintStart_toEndOf="@+id/like"
         app:layout_constraintTop_toBottomOf="@+id/content_barrier"
         tools:ignore="DuplicateSpeakableTextCheck" />
 

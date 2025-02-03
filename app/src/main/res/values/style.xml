@@ -12,7 +12,24 @@
         </item>
     </style>
 
+    <style name="Widget.AppTheme.ShareCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/share_color</item>
+    </style>
 
+    <style name="Widget.App.Theme.ShareButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="iconTint">@color/share_color</item>
+        <item name="android:minWidth">0dp
+        </item>
+    </style>
 
+    <style name="Widget.AppTheme.MenuCheckBox" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/menu_color</item>
+    </style>
+
+    <style name="Widget.App.Theme.MenuButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="iconTint">@color/menu_color</item>
+        <item name="android:minWidth">0dp
+        </item>
+    </style>
 
 </resources>

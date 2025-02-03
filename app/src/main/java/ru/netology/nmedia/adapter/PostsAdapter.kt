@@ -48,12 +48,17 @@ class PostViewHolder(
         author.text = post.author
         published.text = post.published
         content.text = post.content
-        like.isChecked = post.likedByMe
+        like.isChecked = post.likedByMe  // в место like.setImageResource
         like.setText(post.likes.formatCount())
 
-        share.setOnClickListener {
+
+
+        share.isChecked = post.shareByMe
+        share.setText(post.shares.formatCount())
+
+    share.setOnClickListener {
             callback(PostAction.Share(post.id))
-        }
+       }
 //        like.setImageResource(
 //            if (post.likedByMe) R.drawable.ic_baseline_favorite_24 else R.drawable.ic_baseline_favorite_border_24
 //        )
@@ -80,7 +85,7 @@ class PostViewHolder(
         }
 
 //        likeCount.text = post.likes.formatCount()
-        shareCount.text = post.shares.formatCount()
+//        shareCount.text = post.shares.formatCount()
     }
 
 

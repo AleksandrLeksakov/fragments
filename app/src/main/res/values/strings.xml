@@ -10,10 +10,12 @@
     <string name="share_count" translatable="false">35</string>
     <string name="view_count" translatable="false">2032</string>
     <string name="like_description" translatable="false">Like</string>
+    <string name="sher_description" translatable="false">Shere</string>
     <string name="menu_remove">Remove</string>
     <string name="description_post_save">Seve</string>
     <string name="em" translatable="false">error_empty_content</string>
     <string name="menu_edit">Edit</string>
     <string name="description_post_cancellation" translatable="false">Cancellation</string>
     <string name="description_fab_add_new_post" translatable="false">description_fab_add_new_post</string>
+    <string name="shere" translatable="false">shere</string>
 </resources>

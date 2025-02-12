@@ -1,8 +1,10 @@
 package ru.netology.nmedia
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.adapter.OnInteractionListener
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        enableEdgeToEdge()
 
         val viewModel: PostViewModel by viewModels()
         val adapter = PostsAdapter(object : OnInteractionListener {
@@ -27,6 +30,19 @@ class MainActivity : AppCompatActivity() {
 
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
+            }
+
+            override fun onShare(post: Post) {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+
+                }
+
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(shareIntent)
             }
 
             override fun onRemove(post: Post) {
@@ -68,4 +84,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

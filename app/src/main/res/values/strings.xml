@@ -18,4 +18,5 @@
     <string name="description_post_cancellation" translatable="false">Cancellation</string>
     <string name="description_fab_add_new_post" translatable="false">description_fab_add_new_post</string>
     <string name="shere" translatable="false">shere</string>
+    <string name="chooser_share_post">Share post</string>
 </resources>

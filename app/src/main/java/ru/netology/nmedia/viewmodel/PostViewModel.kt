@@ -11,7 +11,10 @@ private val empty = Post(
     author = "",
     likedByMe = false,
     likes = 0,
-    published = ""
+    published = "",
+    shareById = false,
+    shares = 0
+
 )
 
 class PostViewModel : ViewModel() {
@@ -41,4 +44,6 @@ class PostViewModel : ViewModel() {
 
     fun likeById(id: Long) = repository.likeById(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun shareById(id: Long) = repository.shareById(id)
+
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+import java.util.Locale
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
@@ -19,7 +20,7 @@ interface OnInteractionListener {
 
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener,
-) : ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
+) : ListAdapter<Post, PostViewHolder>(PostViewHolder.PostDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding, onInteractionListener)
@@ -42,8 +43,11 @@ class PostViewHolder(
             published.text = post.published
             content.text = post.content
             // в адаптере
+            share.isChecked = post.shareById
+            share.text = "${post.shares.formatCount()}"
+
             like.isChecked = post.likedByMe
-            like.text = "${post.likes}"
+            like.text = "${post.likes.formatCount()}"
 //          вместо
 //          like.setImageResource(
 //              if (post.likedByMe) R.drawable.ic_liked_24dp else R.drawable.ic_like_24dp
@@ -58,6 +62,7 @@ class PostViewHolder(
                                 onInteractionListener.onRemove(post)
                                 true
                             }
+
                             R.id.edit -> {
                                 onInteractionListener.onEdit(post)
                                 true
@@ -78,14 +83,23 @@ class PostViewHolder(
             }
         }
     }
-}
 
-class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem.id == newItem.id
+    private fun Int.formatCount(): String {
+        return when {
+            this < 1000 -> this.toString()
+            this < 10000 -> String.format(Locale.getDefault(), "%.1fK", this / 1000.0)
+            this < 1000000 -> String.format(Locale.getDefault(), "%.0fK", this / 1000.0)
+            else -> String.format(Locale.getDefault(), "%.1fM", this / 1000000.0)
+        }
     }
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-        return oldItem == newItem
+    class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+            return oldItem == newItem
+        }
     }
 }

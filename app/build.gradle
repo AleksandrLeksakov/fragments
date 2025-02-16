@@ -39,6 +39,7 @@ android {
 
 dependencies {
     implementation 'androidx.mediarouter:mediarouter:1.7.0'
+    implementation 'androidx.activity:activity:1.10.0'
     def core_version = "1.15.0"
     def appcompat_version = "1.7.0"
     def mdc_version = "1.12.0"

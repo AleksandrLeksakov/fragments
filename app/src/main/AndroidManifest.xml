@@ -9,15 +9,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NMedia">
         <activity
+            android:name=".activity.NewPostActivity"
+            android:exported="false" /> <!-- folse значит что activity можно исползовать только внутри приложения -->
+        <activity
             android:name=".activity.IntentHandlerActivity"
-            android:exported="true"> <!-- значение true  -->
+            android:exported="true"> <!-- значение true  значит что activity можно исползовать из вне  -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MainActivity"
             android:exported="true">

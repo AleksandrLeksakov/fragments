@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.save.setOnClickListener {
+        binding.ok.setOnClickListener {
             with(binding.content) {
                 if (text.isNullOrBlank()) {
                     Toast.makeText(
@@ -89,3 +89,6 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
+

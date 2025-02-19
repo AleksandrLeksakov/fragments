@@ -10,7 +10,9 @@
         android:theme="@style/Theme.NMedia">
         <activity
             android:name=".activity.NewPostActivity"
-            android:exported="false" /> <!-- folse значит что activity можно исползовать только внутри приложения -->
+        android:exported="false"
+            android:windowSoftInputMode="adjustResize" /> <!-- изменяет размер активити при появлении клавеатуры -->
+
         <activity
             android:name=".activity.IntentHandlerActivity"
             android:exported="true"> <!-- значение true  значит что activity можно исползовать из вне  -->

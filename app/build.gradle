@@ -39,6 +39,7 @@ android {
 
 dependencies {
 
+    implementation 'com.google.ai.client.generativeai:generativeai:0.9.0'
     def core_version = "1.15.0"
     def appcompat_version = "1.7.0"
     def mdc_version = "1.12.0"

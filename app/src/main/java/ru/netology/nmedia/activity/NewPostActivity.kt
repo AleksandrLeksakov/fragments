@@ -22,11 +22,13 @@ class NewPostActivity : AppCompatActivity() {
             } else {
 
                 //  если текст не пустой результат успешен
-                setResult(RESULT_OK, intent)
+                setResult(RESULT_OK, intent.apply { putExtra("text", text) })
             }
             finish()
         }
     }
+
+
 }
 
 class NewPostResultContract : ActivityResultContract<Unit, String?>() {
@@ -34,10 +36,5 @@ class NewPostResultContract : ActivityResultContract<Unit, String?>() {
     override fun createIntent(context: Context, input: Unit): Intent =
         Intent(context, NewPostActivity::class.java)
 
-    override fun parseResult(resultCode: Int, intent: Intent?): String? =
-        if (resultCode == Activity.RESULT_OK) {
-            intent?.getStringExtra(Intent.EXTRA_TEXT)
-        } else {
-            null
-        }
+    override fun parseResult(resultCode: Int, intent: Intent?) = intent?.getStringExtra("text")
 }

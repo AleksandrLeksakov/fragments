@@ -9,13 +9,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NMedia">
         <activity
+            android:name=".activity.EditPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.NewPostActivity"
-        android:exported="false"
+            android:exported="false"
             android:windowSoftInputMode="adjustResize" /> <!-- изменяет размер активити при появлении клавеатуры -->
-
         <activity
             android:name=".activity.IntentHandlerActivity"
-            android:exported="true"> <!-- значение true  значит что activity можно исползовать из вне  -->
+            android:exported="true"> <!-- значение true  значит что activity можно исползовать из вне -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 

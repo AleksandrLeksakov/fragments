@@ -19,4 +19,6 @@
     <string name="description_fab_add_new_post" translatable="false">description_fab_add_new_post</string>
     <string name="shere" translatable="false">shere</string>
     <string name="chooser_share_post">Share post</string>
+    <string name="add_post" translatable="false">Add post</string>
+    <string name="hint_new_post">hint_new_post</string>
 </resources>

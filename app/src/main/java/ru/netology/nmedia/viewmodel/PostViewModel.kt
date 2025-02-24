@@ -45,5 +45,11 @@ class PostViewModel : ViewModel() {
     fun likeById(id: Long) = repository.likeById(id)
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
+    fun changeContentAndSave(postId: Long, newContent: String) {
+        val post = data.value?.find { it.id == postId } ?: return  // Находим пост
+        val editedPost = post.copy(content = newContent) // Создаем копию с новым контентом
+        edit(editedPost)  // Устанавливаем в edited, чтобы при save() был вызван save()
+        save() // Сохраняем
+    }
 
 }

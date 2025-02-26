@@ -1,8 +1,11 @@
 package ru.netology.nmedia.activity
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +32,34 @@ class MainActivity : AppCompatActivity() {
         }
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onEdit(post: Post) {
-                viewModel.edit(post)
+                val dialogView = layoutInflater.inflate(R.layout.fragment_new_post, null) // Используем новый layout
+                val editText = dialogView.findViewById<EditText>(R.id.editText)
+                val cancelButton = dialogView.findViewById<Button>(R.id.cancelButton)
+                val saveButton = dialogView.findViewById<Button>(R.id.saveButton)
+
+                editText.setText(post.content)
+
+                val builder = AlertDialog.Builder(this@MainActivity)
+                    .setView(dialogView)
+                    .setTitle("Редактировать пост")
+
+                val dialog = builder.create()
+                dialog.show()
+
+                cancelButton.setOnClickListener {
+                    dialog.dismiss()
+                }
+
+                saveButton.setOnClickListener {
+                    val editedText = editText.text.toString()
+                    if (editedText.isNotBlank()) {
+                        viewModel.edit(post.copy(content = editedText))
+                        viewModel.save()
+                    }
+                    dialog.dismiss()
+                }
             }
+
 
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)

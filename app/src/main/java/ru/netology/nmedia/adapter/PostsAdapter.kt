@@ -1,8 +1,13 @@
 package ru.netology.nmedia.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +41,7 @@ class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
+    private val imageViewVideo: ImageView = binding.root.findViewById(R.id.imageViewVideo)
 
     fun bind(post: Post) {
         binding.apply {
@@ -80,6 +86,18 @@ class PostViewHolder(
 
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
+            }
+            imageViewVideo.visibility = if (post.videoUrl.isNullOrEmpty()) View.GONE else View.VISIBLE
+            imageViewVideo.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
+                val packageManager = itemView.context.packageManager
+                val resolvedActivity = intent.resolveActivity(packageManager)
+
+                if (resolvedActivity != null) {
+                    itemView.context.startActivity(intent)
+                } else {
+                    Toast.makeText(itemView.context, "Нет приложения для воспроизведения видео", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

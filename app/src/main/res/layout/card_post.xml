@@ -88,15 +88,26 @@
             app:constraint_referenced_ids="content" />
 
 
+        <ImageView
+            android:id="@+id/imageViewVideo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_video_24"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/footer" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/like"
             style="@style/Widget.App.Theme.LikeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:checkable="true"
             android:contentDescription="@string/like_description"
             app:icon="@drawable/ic_like_24"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewVideo"
             app:layout_constraintTop_toBottomOf="@id/footer"
             tools:checked="true"
             tools:text="@string/like_count" />
@@ -108,10 +119,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/common_spacing"
             android:contentDescription="@string/sher_description"
-            app:icon="@drawable/ic_share_24"
             android:textColor="#00BCD4"
+            app:icon="@drawable/ic_share_24"
             app:layout_constraintStart_toEndOf="@+id/like"
             app:layout_constraintTop_toBottomOf="@id/footer"
             tools:text="@string/share_count" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

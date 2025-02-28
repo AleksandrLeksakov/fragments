@@ -14,13 +14,11 @@ private val empty = Post(
     published = "",
     shareById = false,
     shares = 0
-
 )
 
 class PostViewModel : ViewModel() {
-    // упрощённый вариант
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val data = repository.getAll()
+    val data: LiveData<List<Post>> = repository.getAll()
     val edited = MutableLiveData(empty)
 
     fun save() {
@@ -34,6 +32,10 @@ class PostViewModel : ViewModel() {
         edited.value = post
     }
 
+    fun cancelEdit() {
+        edited.value = empty
+    }
+
     fun changeContent(content: String) {
         val text = content.trim()
         if (edited.value?.content == text) {
@@ -45,11 +47,10 @@ class PostViewModel : ViewModel() {
     fun likeById(id: Long) = repository.likeById(id)
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
-    fun changeContentAndSave(postId: Long, newContent: String) {
-        val post = data.value?.find { it.id == postId } ?: return  // Находим пост
-        val editedPost = post.copy(content = newContent) // Создаем копию с новым контентом
-        edit(editedPost)  // Устанавливаем в edited, чтобы при save() был вызван save()
-        save() // Сохраняем
-    }
 
+    fun changeContentAndSave(postId: Long, newContent: String) {
+        val post = data.value?.find { it.id == postId } ?: return
+        edit(post.copy(content = newContent))
+        save()
+    }
 }

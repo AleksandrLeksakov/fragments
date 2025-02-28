@@ -1,13 +1,9 @@
 package ru.netology.nmedia.adapter
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +17,9 @@ interface OnInteractionListener {
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
     fun onShare(post: Post) {}
+    fun onPlayVideo(post: Post) {}
 }
+
 
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener,
@@ -41,23 +39,17 @@ class PostViewHolder(
     private val binding: CardPostBinding,
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
-    private val imageViewVideo: ImageView = binding.root.findViewById(R.id.imageViewVideo)
 
     fun bind(post: Post) {
         binding.apply {
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            // в адаптере
             share.isChecked = post.shareById
             share.text = "${post.shares.formatCount()}"
 
             like.isChecked = post.likedByMe
             like.text = "${post.likes.formatCount()}"
-//          вместо
-//          like.setImageResource(
-//              if (post.likedByMe) R.drawable.ic_liked_24dp else R.drawable.ic_like_24dp
-//          )
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -87,17 +79,11 @@ class PostViewHolder(
             share.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-            imageViewVideo.visibility = if (post.videoUrl.isNullOrEmpty()) View.GONE else View.VISIBLE
-            imageViewVideo.setOnClickListener {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.videoUrl))
-                val packageManager = itemView.context.packageManager
-                val resolvedActivity = intent.resolveActivity(packageManager)
 
-                if (resolvedActivity != null) {
-                    itemView.context.startActivity(intent)
-                } else {
-                    Toast.makeText(itemView.context, "Нет приложения для воспроизведения видео", Toast.LENGTH_SHORT).show()
-                }
+            imageViewVideo.visibility =
+                if (post.videoUrl.isNullOrEmpty()) View.GONE else View.VISIBLE
+            imageViewVideo.setOnClickListener {
+                onInteractionListener.onPlayVideo(post)
             }
         }
     }

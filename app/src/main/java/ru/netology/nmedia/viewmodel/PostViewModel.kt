@@ -13,7 +13,8 @@ private val empty = Post(
     likes = 0,
     published = "",
     shareById = false,
-    shares = 0
+    shares = 0,
+    videoUrl = null
 )
 
 class PostViewModel : ViewModel() {
@@ -44,13 +45,21 @@ class PostViewModel : ViewModel() {
         edited.value = edited.value?.copy(content = text)
     }
 
+    fun changeVideoUrl(videoUrl: String) {
+        val url = videoUrl.trim()
+        if (edited.value?.videoUrl == url) {
+            return
+        }
+        edited.value = edited.value?.copy(videoUrl = url)
+    }
+
     fun likeById(id: Long) = repository.likeById(id)
     fun removeById(id: Long) = repository.removeById(id)
     fun shareById(id: Long) = repository.shareById(id)
 
-    fun changeContentAndSave(postId: Long, newContent: String) {
+    fun changeContentAndSave(postId: Long, newContent: String, newVideoUrl: String?) {
         val post = data.value?.find { it.id == postId } ?: return
-        edit(post.copy(content = newContent))
+        edit(post.copy(content = newContent, videoUrl = newVideoUrl))
         save()
     }
 }

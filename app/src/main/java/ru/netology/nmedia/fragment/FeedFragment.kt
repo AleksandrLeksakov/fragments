@@ -30,7 +30,8 @@ class FeedFragment : Fragment() {
         if (result.resultCode == RESULT_OK) {
             val postId = result.data?.getLongExtra("postId", 0) ?: 0
             val newContent = result.data?.getStringExtra("newContent") ?: ""
-            viewModel.changeContentAndSave(postId, newContent)
+            val newVideoUrl = result.data?.getStringExtra("newVideoUrl") ?: ""
+            viewModel.changeContentAndSave(postId, newContent, newVideoUrl)
         }
     }
 
@@ -63,6 +64,7 @@ class FeedFragment : Fragment() {
                 val intent = Intent(requireContext(), EditPostActivity::class.java).apply {
                     putExtra("postId", post.id)
                     putExtra("postContent", post.content)
+                    putExtra("currentVideoUrl", post.videoUrl) // Передаем текущий videoUrl
                 }
                 editPostLauncher.launch(intent)
             }

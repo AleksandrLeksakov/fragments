@@ -16,15 +16,18 @@ class EditPostActivity : AppCompatActivity() {
 
         val postId = intent.getLongExtra("postId", 0)
         val postContent = intent.getStringExtra("postContent")
+        val postVideoUrl = intent.getStringExtra("postVideoUrl") ?: ""
 
         binding.editContentEditText.setText(postContent) // Установите текст в EditText
-
+        binding.editVideoUrlEditText.setText(postVideoUrl)
         // Обработчик нажатия на кнопку "Сохранить"
         binding.editSaveButton.setOnClickListener {
             val newContent = binding.editContentEditText.text.toString()
+            val newVideoUrl = binding.editVideoUrlEditText.text.toString()
             val intent = Intent().apply {
                 putExtra("postId", postId)
                 putExtra("newContent", newContent)
+                putExtra("newVideoUrl", newVideoUrl)
             }
             setResult(RESULT_OK, intent) // Устанавливаем результат
             finish() // Закрываем Activity

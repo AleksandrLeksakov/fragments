@@ -105,18 +105,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.save.setOnClickListener {
             val content = binding.content.text.toString()
+            val videoUrl = binding.videoUrl.text.toString()
             if (content.isNotBlank()) {
                 viewModel.changeContent(content)
+                viewModel.changeVideoUrl(videoUrl)
                 viewModel.save()
             }
             binding.group.visibility = View.GONE
             binding.content.setText("")
+            binding.videoUrl.setText("")
         }
 
         binding.cancel.setOnClickListener {
             viewModel.cancelEdit()
             binding.group.visibility = View.GONE
             binding.content.setText("")
+            binding.videoUrl.setText("")
         }
 
         binding.fab.setOnClickListener {

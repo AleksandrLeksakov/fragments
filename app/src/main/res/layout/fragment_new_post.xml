@@ -1,25 +1,43 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    tools:context=".activity.NewPostFragment">
 
-    <EditText
-        android:id="@+id/editText"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start|top"
+        android:inputType="textMultiLine">
+    </com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите текст" />
+        android:layout_gravity="bottom" />
 
-    <Button
-        android:id="@+id/cancelButton"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Отмена" />
+        android:contentDescription="@string/description_post_save"
+        app:layout_anchor="@id/bottomAppBar"
+        app:srcCompat="@drawable/ic_ok_24dp" />
 
-    <Button
-        android:id="@+id/saveButton"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Сохранить" />
+        app:layout_anchor="@id/bottomAppBar"
+        android:contentDescription="@string/description_post_cancellation"
+        app:srcCompat="@drawable/ic_cancellation_48" />
 
-</LinearLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -40,17 +40,18 @@ class NewPostFragment : Fragment() {
         arguments?.textArg
             ?.let(binding.edit::setText)
 
+
+
+        binding.cancelButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding.ok.setOnClickListener {
             viewModel.changeContent(binding.edit.text.toString())
             viewModel.save()
             AndroidUtils.hideKeyboard(requireView())
             findNavController().navigateUp()
-
-
-
         }
-
-
         return binding.root
     }
 }

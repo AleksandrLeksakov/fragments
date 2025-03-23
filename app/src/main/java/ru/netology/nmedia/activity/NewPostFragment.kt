@@ -10,9 +10,13 @@ import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.util.StringArg
+import ru.netology.nmedia.util.StringArg.getValue
+import ru.netology.nmedia.util.StringArg.setValue
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class NewPostFragment : Fragment() {
+
+
 
     companion object {
         var Bundle.textArg: String? by StringArg
@@ -41,7 +45,12 @@ class NewPostFragment : Fragment() {
             viewModel.save()
             AndroidUtils.hideKeyboard(requireView())
             findNavController().navigateUp()
+
+
+
         }
+
+
         return binding.root
     }
 }
